@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas 🌼</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to top, #fff9e6, #fff3b0);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #d4a017;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            z-index: 10;
+            padding: 0 10px;
+        }
+
+        /* Tamaño general de las flores (más grandes que antes) */
+        .flower {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            animation: float 12s linear infinite;
+        }
+
+        .petal {
+            width: 40px;
+            height: 65px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 35px;
+            transform-origin: bottom center;
+        }
+
+        .petal:nth-child(1) {
+            transform: rotate(0deg) translateY(-30px);
+        }
+
+        .petal:nth-child(2) {
+            transform: rotate(60deg) translateY(-30px);
+        }
+
+        .petal:nth-child(3) {
+            transform: rotate(120deg) translateY(-30px);
+        }
+
+        .petal:nth-child(4) {
+            transform: rotate(180deg) translateY(-30px);
+        }
+
+        .petal:nth-child(5) {
+            transform: rotate(240deg) translateY(-30px);
+        }
+
+        .petal:nth-child(6) {
+            transform: rotate(300deg) translateY(-30px);
+        }
+
+        /* Centro marrón más abajo */
+        .center {
+            width: 38px;
+            height: 38px;
+            background: #6b4f1d;
+            border-radius: 50%;
+            position: absolute;
+            top: 65px;
+            /* bajado (antes 25px) */
+            left: 36px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-20vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Ajustes para pantallas pequeñas (más grandes en móviles también) */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .flower {
+                width: 90px;
+                height: 90px;
+            }
+
+            .petal {
+                width: 32px;
+                height: 52px;
+                top: 15px;
+                left: 28px;
+            }
+
+            .center {
+                width: 40px;
+                height: 40px;
+                top: 25px;
+                /* también bajado en móviles */
+                left: 28px;
+            }
+        }
+
+        /* ======== MENÚ DESPLEGABLE MEJORADO ======== */
+        .menu-desplegable {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .menu-boton {
+            background: #e75480;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(231, 84, 128, 0.3);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-boton:hover {
+            background: #b83260;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(231, 84, 128, 0.4);
+        }
+
+        .menu-contenido {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            min-width: 200px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: 2px solid #ffe0ec;
+            animation: fadeIn 0.3s ease forwards;
+            z-index: 1001;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            display: block;
+            padding: 16px 20px;
+            background: white;
+            color: #b83260;
+            border-bottom: 1px solid #ffe0ec;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .menu-link:hover {
+            background: #ffe0ec;
+            color: #e75480;
+            padding-left: 25px;
+        }
+
+        .menu-title {
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .menu-link:last-child {
+            border-bottom: none;
+        }
+
+        /* Animación para el menú */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Mostrar menú cuando tenga la clase active */
+        .menu-contenido.active {
+            display: block;
+        }
+
+        /* Overlay para móviles */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Para móviles */
+        @media (max-width: 600px) {
+            .menu-desplegable {
+                top: 15px;
+                right: 15px;
+            }
+
+            .menu-boton {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                padding: 10px;
+            }
+
+            .menu-contenido {
+                top: 55px;
+                min-width: 180px;
+                right: 10px;
+            }
+
+            .menu-link {
+                padding: 14px 18px;
+            }
+
+            /* Mostrar overlay en móviles cuando el menú está abierto */
+            .menu-overlay.active {
+                display: block;
+            }
+
+            .menu-contenido {
+                position: fixed;
+                top: 70px;
+                right: 15px;
+                left: 15px;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Overlay para móviles -->
+    <div class="menu-overlay" id="menu-overlay" onclick="cerrarMenu()"></div>
+
+    <div class="menu-desplegable">
+        <button class="menu-boton" id="menu-boton" onclick="toggleMenu()">...</button>
+        <div class="menu-contenido" id="menu-contenido">
+            <a href="index.html" class="menu-link" onclick="scrollToSection('inicio'); return false;">
+                <h3 class="menu-title">🏠 Inicio</h3>
+            </a>
+            <a href="flores.html" class="menu-link" onclick="return false;">
+                <h3 class="menu-title">🌼 Flores</h3>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Función para alternar el menú
+        function toggleMenu() {
+            const menu = document.getElementById('menu-contenido');
+            const overlay = document.getElementById('menu-overlay');
+            const boton = document.getElementById('menu-boton');
+
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                boton.innerHTML = '...';
+            } else {
+                menu.classList.add('active');
+                overlay.classList.add('active');
+                boton.innerHTML = '✕';
+            }
+        }
+
+        // Función para cerrar el menú
+        function cerrarMenu() {
+            const menu = document.getElementById('menu-contenido');
+            const overlay = document.getElementById('menu-overlay');
+            const boton = document.getElementById('menu-boton');
+
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+            boton.innerHTML = '...';
+        }
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('menu-contenido');
+            const boton = document.getElementById('menu-boton');
+            const overlay = document.getElementById('menu-overlay');
+
+            if (menu.classList.contains('active') &&
+                !menu.contains(e.target) &&
+                !boton.contains(e.target)) {
+                cerrarMenu();
+            }
+        });
+
+        // Cerrar menú con la tecla ESC
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                cerrarMenu();
+            }
+        });
+
+        // Scroll suave a secciones
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+            cerrarMenu();
+        }
+
+        // Ajustar menú al redimensionar
+        window.addEventListener('resize', function () {
+            cerrarMenu();
+        });
+    </script>
+
+    <h1>💛 I love for ever my little sister 💛</h1>
+    <h1>💛 These yellow flowers are for you 💛</h1>
+
+    <script>
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+
+            // crear 6 pétalos
+            for (let i = 0; i < 6; i++) {
+                const petal = document.createElement("div");
+                petal.classList.add("petal");
+                flower.appendChild(petal);
+            }
+
+            // centro de la flor
+            const center = document.createElement("div");
+            center.classList.add("center");
+            flower.appendChild(center);
+
+            flower.style.left = Math.random() * 100 + "vw";
+            flower.style.animationDuration = (7 + Math.random() * 6) + "s";
+
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 14000);
+        }
+
+        // crear flores cada 1 segundo
+        setInterval(createFlower, 1000);
+    </script>
+</body>
+
+</html>

@@ -12,6 +12,85 @@
 
 <body>
 
+    <!-- Overlay para móviles -->
+    <div class="menu-overlay" id="menu-overlay" onclick="cerrarMenu()"></div>
+
+    <div class="menu-desplegable">
+        <button class="menu-boton" id="menu-boton" onclick="toggleMenu()">...</button>
+        <div class="menu-contenido" id="menu-contenido">
+            <a href="index.html" class="menu-link" onclick="scrollToSection('inicio'); return false;">
+                <h3 class="menu-title">🏠 Inicio</h3>
+            </a>
+            <a href="flores.html" class="menu-link" onclick="return false;">
+                <h3 class="menu-title">🌼 Flores</h3>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Función para alternar el menú
+        function toggleMenu() {
+            const menu = document.getElementById('menu-contenido');
+            const overlay = document.getElementById('menu-overlay');
+            const boton = document.getElementById('menu-boton');
+
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                boton.innerHTML = '...';
+            } else {
+                menu.classList.add('active');
+                overlay.classList.add('active');
+                boton.innerHTML = '✕';
+            }
+        }
+
+        // Función para cerrar el menú
+        function cerrarMenu() {
+            const menu = document.getElementById('menu-contenido');
+            const overlay = document.getElementById('menu-overlay');
+            const boton = document.getElementById('menu-boton');
+
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+            boton.innerHTML = '...';
+        }
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('menu-contenido');
+            const boton = document.getElementById('menu-boton');
+            const overlay = document.getElementById('menu-overlay');
+
+            if (menu.classList.contains('active') &&
+                !menu.contains(e.target) &&
+                !boton.contains(e.target)) {
+                cerrarMenu();
+            }
+        });
+
+        // Cerrar menú con la tecla ESC
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                cerrarMenu();
+            }
+        });
+
+        // Scroll suave a secciones
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+            cerrarMenu();
+        }
+
+        // Ajustar menú al redimensionar
+        window.addEventListener('resize', function () {
+            cerrarMenu();
+        });
+    </script>
+
     <h1>My little sister</h1>
     <p>Se que perfectamente, recien nos estamos volviendo a ver despues de tanto tiempo (2 años, aunque para mi paso 1)
         y puede que no me acuerde de muchas cosas, pero lo que si se, es que te quiero y que de verdad me importas <i
@@ -57,6 +136,5 @@
         </div>
     </footer>
 </body>
-
 
 </html>
