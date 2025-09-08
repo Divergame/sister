@@ -265,6 +265,22 @@
                 min-width: auto;
             }
         }
+
+        @media (max-width: 600px) {
+            .menu-boton {
+                padding: 10px 12px;
+                font-size: 1.1rem;
+            }
+
+            .menu-contenido {
+                min-width: 150px;
+                top: 50px;
+            }
+
+            .menu-title {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
@@ -273,19 +289,20 @@
     <!-- Overlay para móviles -->
     <div class="menu-overlay" id="menu-overlay" onclick="cerrarMenu()"></div>
 
+
     <div class="menu-desplegable">
         <button class="menu-boton" id="menu-boton" onclick="toggleMenu()" aria-label="Abrir menú">≡</button>
 
         <div class="menu-contenido" id="menu-contenido">
-            <a href="index.html" class="menu-link">
+            <a href="index.html" class="menu-link" onclick="cerrarMenu()">
                 <h3 class="menu-title">🏠 Inicio</h3>
             </a>
-
             <a href="flores.html" class="menu-link" onclick="cerrarMenu()">
                 <h3 class="menu-title">🌼 Flores</h3>
             </a>
-
-
+            <a href="cartas.html" class="menu-link" onclick="cerrarMenu()">
+                <h3 class="menu-title">💌 Cartas</h3>
+            </a>
         </div>
     </div>
 
